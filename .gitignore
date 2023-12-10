@@ -31,7 +31,7 @@ replay_pid*
 /nb-configuration.xml
 
 # Игнорировать файл build.xml
-# context.xml
+context.xml
 
 # Игнорировать файл build.xml
 build.xml
