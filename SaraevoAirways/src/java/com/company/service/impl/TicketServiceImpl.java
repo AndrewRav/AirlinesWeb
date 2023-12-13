@@ -4,6 +4,7 @@ import com.company.dao.Dao;
 import com.company.model.Ticket;
 import java.util.Set;
 import com.company.service.TicketService;
+import static java.util.stream.Collectors.toSet;
 
 public class TicketServiceImpl implements TicketService {
     Dao<Ticket> ticketDao;
@@ -42,6 +43,12 @@ public class TicketServiceImpl implements TicketService {
     public boolean delete(int id) {
         Ticket ticket = new Ticket(id);
         return ticketDao.delete(ticket) > 0;
+    }
+    
+    @Override
+    public Ticket getById(int id) {
+        return ticketDao.read().stream().filter(ticket -> id == ticket.getId())
+                .collect(toSet()).iterator().next();
     }
     
 }

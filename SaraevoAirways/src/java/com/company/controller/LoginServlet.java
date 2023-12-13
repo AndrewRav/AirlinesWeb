@@ -2,7 +2,6 @@ package com.company.controller;
 
 import com.company.model.User;
 import java.io.IOException;
-import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +18,12 @@ public class LoginServlet extends InitServlet implements Jumpable {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         User loginUser = userService.login(login, password);
-        session.setAttribute("deleteStatus", "asd");
         
         if (loginUser != null) {
             session.setAttribute("firstName", loginUser.getFirstName());
             session.setAttribute("surName", loginUser.getSurName());
             session.setAttribute("id", loginUser.getId());
+            jump("/WEB-INF/jsp/main.jsp", request, response);
         } else {
             request.setAttribute("status", "failed");
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
