@@ -19,11 +19,7 @@ public class UpdateUserServlet extends InitServlet implements Jumpable {
         int id = Integer.parseInt(idString);
         User user = userService.getById(id);
         request.setAttribute("user", user);
-        if (request.getSession().getAttribute("status").equals("user")) {
-         jump("/WEB-INF/jsp/updatePersonalData.jsp", request, response);   
-        } else {
-         jump("/WEB-INF/jsp/updateUsersAdmin.jsp", request, response);   
-        }
+        jump("/WEB-INF/jsp/updateUser.jsp", request, response);
     }
 
     @Override
@@ -39,13 +35,7 @@ public class UpdateUserServlet extends InitServlet implements Jumpable {
         String idString = request.getParameter("id");
         int id = Integer.parseInt(idString);
         boolean success = userService.update(id, login, password, lastName, firstName, surName, email);
-        // request.setAttribute("success", success ? "Данные обновлены" : "Данные не обновлены");
-        // jump("/WEB-INF/jsp/result.jsp", request, response);
-        if (success == true) {
-            request.setAttribute("status", "success");
-        } else {
-            request.setAttribute("status", "failed");
-        }
-        doGet(request, response);
+        request.setAttribute("success", success);
+        jump("/WEB-INF/jsp/result.jsp", request, response);
     }
 }

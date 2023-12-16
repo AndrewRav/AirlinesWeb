@@ -3,43 +3,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
+    <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+    <fmt:bundle basename="com.company.localization.messages.msg">
     <head>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            th, td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
-            th {
-                background-color: #4CAF50;
-                color: white;
-            }
-            .update, .delete {
-                color: white;
-                background-color: #4CAF50;
-                text-decoration: none;
-                padding: 8px;
-            }
-        </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <style><%@include file="../resources/css/readStyle.css"%></style>
+            <title><fmt:message key="title.users"/></title>
     </head>
     <body>
+        <form action="BackServlet" method="post">
+            <input type="submit" class="leave" value='<fmt:message key="button.back"/>' />
+        </form>
         <table>
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>Логин</th>
-                    <th>Пароль</th>
-                    <th>Фамилия</th>
-                    <th>Имя</th>
-                    <th>Отчество</th>
-                    <th>Email</th>
+                    <th><fmt:message key="label.login"/></th>
+                    <th><fmt:message key="label.password"/></th>
+                    <th><fmt:message key="label.lastName"/></th>
+                    <th><fmt:message key="label.firstName"/></th>
+                    <th><fmt:message key="label.surName"/></th>
+                    <th><fmt:message key="label.email"/></th>
+                    <th><fmt:message key="label.update"/></th>
+                    <th><fmt:message key="label.delete"/></th>
                 </tr>
             </thead>
             <c:forEach var="user" items="${user}">
@@ -53,16 +39,17 @@
                     <td>${user.email}</td>
                     <td><form action="UpdateUserServlet" method="get" class="update">
                             <input type="hidden" name="id" value="${user.id}"/>
-                            <input type="submit" value="Обновить"/>
+                            <input type="submit" value='<fmt:message key="button.update"/>'/>
                         </form>
                     </td>
-                    <td><form action="DeleteUserServlet" method="get" class="delete">
+                    <td><form action="DeleteUserServlet" method="post" class="delete">
                             <input type="hidden" name="id" value="${user.id}"/>
-                            <input type="submit" value="Удалить"/>
+                            <input type="submit" value='<fmt:message key="button.delete"/>'/>
                         </form>
                     </td>                
                 </tr>
             </c:forEach>
         </table>
     </body>
+    </fmt:bundle>
 </html>

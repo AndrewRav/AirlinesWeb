@@ -1,61 +1,42 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Бронирование билетов</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
-            form {
-                width: 300px;
-                margin: 0 auto;
-            }
-            label {
-                display: block;
-                margin-top: 20px;
-            }
-            input[type="text"], input[type="number"] {
-                width: 100%;
-                padding: 10px;
-                margin-top: 5px;
-            }
-            input[type="submit"] {
-                margin-top: 20px;
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                cursor: pointer;
-            }
-            input[type="submit"]:hover {
-                background-color: #45a049;
-            }
-        </style>
-    </head>
-    <body>
-        <form action="CreateTicketServlet" method="post">
-            <label for="flightNumber">Номер рейса:</label>
-            <input type="number" id="flightNumber" name="flightNumber">
-            <label for="seat">Место:</label>
-            <input type="number" id="seat" name="seat">
-            <label for="departurePoint">Пункт отправления:</label>
-            <input type="text" id="departurePoint" name="departurePoint">
-            <label for="destinationPoint">Пункт назначения:</label>
-            <input type="text" id="destinationPoint" name="destinationPoint">
-            <label for="departureTime">Время отправления по Минску:</label>
-            <input type="datetime-local" id="departureTime" name="departureTime">
-            <label for="arrivalTime">Время прибытия по Минску:</label>
-            <input type="datetime-local" id="arrivalTime" name="arrivalTime">
-            <label for="airplaneType">Тип самолета:</label>
-            <input type="text" id="airplaneType" name="airplaneType">
-            <label for="ticketOwnerFirstName">Имя владельца билета:</label>
-            <input type="text" id="ticketOwnerFirstName" name="ticketOwnerFirstName">
-            <label for="ticketOwnerLastName">Фамилия владельца билета:</label>
-            <input type="text" id="ticketOwnerLastName" name="ticketOwnerLastName">
-            <label for="ticketOwnerSurName">Отчество владельца билета:</label>
-            <input type="text" id="ticketOwnerSurName" name="ticketOwnerSurName">
-            <input type="submit" value="Отправить">
-        </form>
-    </body>
+    <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+    <fmt:bundle basename="com.company.localization.messages.msg">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <style><%@include file="../resources/css/createStyle.css"%></style>
+            <title><fmt:message key="title.createTicket"/></title>
+        </head>
+        <body>
+            <form action="BackServlet" method="post">
+                <input type="submit" class="leave" value='<fmt:message key="button.back"/>' />
+            </form>
+            <form action="CreateTicketServlet" method="post">
+                <label for="flightNumber"><fmt:message key="label.flightNumber"/></label>
+                <input type="number" id="flightNumber" name="flightNumber" required>
+                <label for="seat"><fmt:message key="label.seat"/></label>
+                <input type="number" id="seat" name="seat" required>
+                <label for="departurePoint"><fmt:message key="label.departurePoint"/></label>
+                <input type="text" id="departurePoint" name="departurePoint" required>
+                <label for="destinationPoint"><fmt:message key="label.destinationPoint"/></label>
+                <input type="text" id="destinationPoint" name="destinationPoint" required>
+                <label for="departureTime"><fmt:message key="label.departureTime"/></label>
+                <input type="datetime-local" id="departureTime" name="departureTime" required>
+                <label for="arrivalTime"><fmt:message key="label.arrivalTime"/></label>
+                <input type="datetime-local" id="arrivalTime" name="arrivalTime" required>
+                <label for="airplaneType"><fmt:message key="label.airplaneType"/></label>
+                <input type="text" id="airplaneType" name="airplaneType" required>
+                <label for="ticketOwnerFirstName"><fmt:message key="label.ticketOwnerFirstName"/></label>
+                <input type="text" id="ticketOwnerFirstName" name="ticketOwnerFirstName" required>
+                <label for="ticketOwnerLastName"><fmt:message key="label.ticketOwnerLastName"/></label>
+                <input type="text" id="ticketOwnerLastName" name="ticketOwnerLastName" required>
+                <label for="ticketOwnerSurName"><fmt:message key="label.ticketOwnerSurName"/></label>
+                <input type="text" id="ticketOwnerSurName" name="ticketOwnerSurName" required>
+                <input type="submit" class="send" value='<fmt:message key="button.send"/>'>
+            </form>
+        </body>
+    </fmt:bundle>
 </html>

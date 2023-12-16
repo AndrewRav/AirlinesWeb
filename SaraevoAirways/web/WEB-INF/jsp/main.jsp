@@ -1,60 +1,45 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
+    <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+    <fmt:bundle basename="com.company.localization.messages.msg">
     <head>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                margin: 0;
-            }
-            .welcome-message {
-                text-align: center;
-                margin-bottom: 50px;
-                font-size: 24px;
-            }
-            button {
-                font-size: 20px;
-                padding: 10px 20px;
-                margin: 10px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-            button a {
-                color: white;
-                text-decoration: none;
-            }
-        </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <style><%@include file="../resources/css/mainStyle.css"%></style>
+            <title><fmt:message key="title.mainPage"/></title>
     </head>
     <body>
         <div class="welcome-message">
-            Добро пожаловать в личный кабинет, <%= session.getAttribute("firstName")%> <%= session.getAttribute("surName")%>
+            <fmt:message key="welcomeMessage"/>, <%= session.getAttribute("firstName")%> <%= session.getAttribute("surName")%>
         </div>
-        <button><a href="createTicket.jsp">Создать билет</a></button>
+        <form action="CreateTicketServlet" method="get" class="form_2">
+            <input class="button" type="submit" value='<fmt:message key="button.createTicket"/>'/>
+        </form>
         <form action="ReadTicketServlet" method="get" class="form_2">
-            <input class="button" type="submit" value="Вывести билеты"/>
+            <input class="button" type="submit" value='<fmt:message key="button.showTickets"/>'/>
         </form>
-        <button><a href="createUser.html">Создать пользователя</a></button>
+        <form action="CreateUserServlet" method="get" class="form_2">
+            <input class="button" type="submit" value='<fmt:message key="button.createUser"/>'/>
+        </form>
         <form action="ReadUserServlet" method="get" class="form_2">
-            <input class="button" type="submit" value="Посмотреть всех пользователей в системе"/>
+            <input class="button" type="submit" value='<fmt:message key="button.showAllUsers"/>'/>
         </form>
-        <form action="" method="get" class="form_4">
-            <label>Введите номер рейса: </label>
-            <input type="number" class="text" id="TicketByFlightNumber" name="TicketByFlightNumber" placeholder="Введите номер рейса" required/><br/>
-            <input class="button" type="submit" value="Вывести билеты по номеру рейса"/>
+        <form action="FlightNumberServlet" method="get" class="form_4">
+            <label><fmt:message key="label.enterFlightNumber"/>: </label>
+            <input type="number" id="ticketByFlightNumber" name="ticketByFlightNumber" placeholder='<fmt:message key="placeholder.enterFlightNumber"/>' required/><br/>
+            <input class="button" type="submit" value='<fmt:message key="button.showTicketsByFlightNumber"/>'/>
         </form>
-        <form action="" method="get" class="form_4">
-            <label>Введите фамилию: </label>
-            <input type="number" class="text" id="TicketByLastName" name="TicketByFlightNumber" placeholder="Введите фамилию" required/><br/>
-            <input class="button" type="submit" value="Вывести билеты по фамилии"/>
+        <form action="TicketOwnerLastNameServlet" method="get" class="form_4">
+            <label><fmt:message key="label.enterLastName"/>: </label>
+            <input type="text" id="ticketByLastName" name="ticketByLastName" placeholder='<fmt:message key="placeholder.enterLastName"/>' required/><br/>
+            <input class="button" type="submit" value='<fmt:message key="button.showTicketsByLastName"/>'/>
+        </form>
+        <form action="index.html" class="form_7">
+            <input type="hidden" name="logout" value="true"/>
+            <input class="leave" type="submit" value='<fmt:message key="button.logout"/>'/>
         </form>
     </body>
+     </fmt:bundle>
 </html>
-

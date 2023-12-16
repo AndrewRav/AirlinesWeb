@@ -46,13 +46,7 @@ public class CreateTicketServlet extends InitServlet implements Jumpable {
         ticket.setTicketOwnerLastName(ticketOwnerLastName);
         ticket.setTicketOwnerSurName(ticketOwnerSurName);
         boolean success = ticketService.create(ticket);
-        request.setAttribute("success", success ? "Данные добавлены" : "Данные не добавлены");
+        request.setAttribute("success", success);
         jump("/WEB-INF/jsp/result.jsp", request, response);
-//        if (success == true) {
-//            request.setAttribute("status", "success");
-//        } else {
-//            request.setAttribute("status", "failed");
-//        }
-//        jump("/WEB-INF/jsp/main.jsp", request, response);
     }
 }

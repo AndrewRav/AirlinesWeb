@@ -9,4 +9,6 @@ public interface TicketService {
     boolean update(int id, int newFlightNumber, int newSeat, String newDeparturePoint, String newDestinationPoint, String newDepartureTime, String newArrivalTime, String newAirplaneType, String newTicketOwnerFirstName, String newTicketOwnerLastName, String newTicketOwnerSurName);
     boolean delete(int id);
     Ticket getById(int id);
+    Set<Ticket> getByFlightNumber(int flightNumber);
+    Set<Ticket> getByLastName(String ticketOwnerLastName);
 }

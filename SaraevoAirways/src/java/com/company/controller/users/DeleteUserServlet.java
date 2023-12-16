@@ -17,11 +17,7 @@ public class DeleteUserServlet extends InitServlet implements Jumpable {
         String stringUserID = request.getParameter("id");
         int id = Integer.parseInt(stringUserID);
         boolean success = userService.delete(id);
-        if (success == true) {
-            request.setAttribute("status", "success");
-        } else {
-            request.setAttribute("status", "failed");
-        }
-        jump("/WEB-INF/jsp/admin.jsp", request, response);
+        request.setAttribute("success", success);
+        jump("/WEB-INF/jsp/result.jsp", request, response);
     }
 }

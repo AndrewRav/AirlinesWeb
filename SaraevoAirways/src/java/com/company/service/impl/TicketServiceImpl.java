@@ -51,4 +51,16 @@ public class TicketServiceImpl implements TicketService {
                 .collect(toSet()).iterator().next();
     }
     
+    @Override
+    public Set<Ticket> getByFlightNumber(int flightNumber) {
+        return ticketDao.read().stream().filter(ticket -> flightNumber == ticket.getFlightNumber())
+                .collect(toSet());
+    }
+    
+    @Override
+    public Set<Ticket> getByLastName(String ticketOwnerLastName) {
+        return ticketDao.read().stream().filter(ticket -> ticketOwnerLastName.equals(ticket.getTicketOwnerLastName()))
+                .collect(toSet());
+    }
+    
 }

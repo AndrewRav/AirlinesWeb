@@ -19,7 +19,7 @@ public class UpdateTicketServlet extends InitServlet implements Jumpable {
         int id = Integer.parseInt(idString);
         Ticket ticket = ticketService.getById(id);
         request.setAttribute("ticket", ticket);
-        jump("/WEB-INF/jsp/updateStudents.jsp", request, response);
+        jump("/WEB-INF/jsp/updateTicket.jsp", request, response);
     }
 
     @Override
@@ -41,13 +41,7 @@ public class UpdateTicketServlet extends InitServlet implements Jumpable {
         String idString = request.getParameter("id");
         int id = Integer.parseInt(idString);
         boolean success = ticketService.update(id, flightNumber, seat, departurePoint, destinationPoint, departureTime, arrivalTime, airplaneType, ticketOwnerFirstName, ticketOwnerLastName, ticketOwnerSurName);
-        // request.setAttribute("success", success ? "Данные обновлены" : "Данные не обновлены");
-        // jump("/WEB-INF/jsp/result.jsp", request, response);
-        if (success == true) {
-            request.setAttribute("status", "success");
-        } else {
-            request.setAttribute("status", "failed");
-        }
-        doGet(request, response);
+        request.setAttribute("success", success);
+        jump("/WEB-INF/jsp/result.jsp", request, response);
     }
 }
